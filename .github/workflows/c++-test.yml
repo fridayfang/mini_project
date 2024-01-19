@@ -16,10 +16,15 @@ jobs:
 
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install -y build-essential cmake
+    - name: Install Valgrind
+      run: sudo apt-get install -y valgrind
 
     - name: Build
       run: cd ./c++/gtest_mini_project && cmake . && make
 
     - name: Test
-      run: cd ./c++/gtest_mini_project
+      run: cd ./c++/gtest_mini_project && ./tests/test_demo
+
+    - name: Run Valgrind Memory Leak Test
+      run: cd ./c++/gtest_mini_project && valgrind --leak-check=full --show-leak-kinds=all ./tests/test_demo
 
