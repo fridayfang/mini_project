@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -28,3 +27,7 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Run Pylint
+      run: |
+        pylint ./py/
+
