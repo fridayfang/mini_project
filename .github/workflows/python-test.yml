@@ -28,7 +28,7 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-    - name: Run Pylint
+    - name: pylint
       run: |
         pylint ./py/pytest_mini_project
 
