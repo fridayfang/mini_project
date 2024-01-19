@@ -1,0 +1,49 @@
+# CMake generated files
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+Makefile
+*.make
+*.cmake
+
+# Build artifacts
+build/
+Release/
+Debug/
+*.o
+*.a
+*.so
+*.dylib
+*.lib
+*.dll
+*.exe
+*.out
+
+# Dependency directories (comment out if dependencies are tracked)
+# libs/
+
+# Editor backups and temporary files
+*~
+*.swp
+*.tmp
+
+# IDE specific files
+.vs/
+.vscode/
+*.code-workspace
+*.user
+*.suo
+*.userosscache
+*.sln
+*.opensdf
+*.ipch
+*.db
+*.opendb
+*.VC.db
+*.VC.VC.opendb
+_deps/
+
+
+# Other files to ignore
+.DS_Store
+Thumbs.db
