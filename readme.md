@@ -4,3 +4,8 @@
 ```
 pytest pytest_mini_project/test_simplemath.py
 ```
+
+### gtest
+```
+cd ./c++/gtest_mini_project && ./tests/test_demo
+```
