@@ -49,3 +49,4 @@ _deps/
 Thumbs.db
 
 .ipynb_checkpoints
+.pytest_cache
