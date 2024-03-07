@@ -33,10 +33,49 @@ std::shared_ptr<Task> TaskQueue::try_deque() {
     if (_queue.empty()) {
         return nullptr;
     }
-    
+
     auto task = _queue.front();
     _queue.pop();
     return task;
+}
+
+const std::shared_ptr<TaskQueue>& GlobalQueue::get_main_queue() {
+    static std::shared_ptr<TaskQueue> g_main_queue = std::make_shared<TaskQueue>("main_queue");
+    return g_main_queue;
+}
+
+std::shared_ptr<TaskQueue> GlobalQueue::get_queue_by_name(const std::string &queue_name){
+    auto it = _queue_map.find(queue_name);
+    if (it != _queue_map.end()) {
+        return it->second;
+    } else {
+        return nullptr;
+    }
+}
+
+
+// 获取默认的全局后台队列
+std::shared_ptr<TaskQueue> GlobalQueue::get_background_queue() {
+    static std::shared_ptr<TaskQueue> background_queue = std::make_shared<TaskQueue>("background");
+    return background_queue;
+}
+
+void GlobalQueue::init_queues(const std::vector<std::string>& queue_names) {
+    get_main_queue();
+    get_background_queue();
+    for (auto& name : queue_names) {
+        init_queue(name);
+    }
+}
+
+bool GlobalQueue::init_queue(const std::string& queue_name) {
+    if(get_queue_by_name(queue_name) != nullptr) {
+        return false;
+    }
+    auto queue = std::make_shared<TaskQueue>(queue_name);
+    _queue_map[queue_name] = queue;
+    return true;
+
 }
 
 }
