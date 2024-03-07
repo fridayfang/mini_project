@@ -39,6 +39,31 @@ private:
     DISALLOW_COPY_AND_ASSIGN(TaskQueue);
 };
 
+class GlobalQueue {
+public:
+// 获取主队列
+static const std::shared_ptr<TaskQueue>& get_main_queue();
+
+static bool is_main_queue(const std::shared_ptr<TaskQueue>& queue) { return queue == get_main_queue(); }
+
+// 根据名称获取子队列，如果队列不存在，则返回nullptr
+static std::shared_ptr<TaskQueue> get_queue_by_name(const std::string &queue_name);
+
+// 获取默认的全局后台队列
+static std::shared_ptr<TaskQueue> get_background_queue();
+
+//  初始化所有队列
+static void init_queues(const std::vector<std::string>& queue_names);
+// 初始化某个队列
+static bool init_queue(const std::string& queue_name);
+
+private:
+    GlobalQueue() {};
+    ~GlobalQueue() {};
+    static std::map<std::string, std::shared_ptr<TaskQueue>> _queue_map;
+    DISALLOW_COPY_AND_ASSIGN(GlobalQueue);
+};
+
 }
 
 #endif
